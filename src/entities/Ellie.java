@@ -31,6 +31,9 @@ public class Ellie extends Entity {
 	
 	private int playerDirection = -1; 
 	private boolean moving = false; 
+	
+	
+	private boolean left, up, right, down ; 
 
 	public Ellie(float x , float y ) {
 		super(x, y); 
@@ -40,7 +43,6 @@ public class Ellie extends Entity {
 	}
 	
 	public void update() {
-		
 		updateAnimationTick(); 
 		setAnimation(); 
 		updatePos(); 
