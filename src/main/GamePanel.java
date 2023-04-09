@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
+import static utilz.Constants.EllieConstants.*;
+import static utilz.Constants.Directions.*;
+
 public class GamePanel extends JPanel {
 
 	private MouseInputs mouseInputs;
@@ -24,15 +27,25 @@ public class GamePanel extends JPanel {
 	private BufferedImage[] dieChar; 
 	private BufferedImage[] idleChar; 
 
+	String imgPath ; 
 	private int aniTick , aniIndex , aniSpeed = 15; 
 	
 	
 	private int x = 0; private int y = 0 ; 
 	
-	public GamePanel() {
 	
+	private int playerAction = ELLIE_IDLE; 
+	private int playerDirection = -1; 
+	private boolean moving = false; 
+	
+	public void setMoving(boolean moving) {
+		this.moving = moving; 
+	}
+	
+	public GamePanel() {
+	imgPath = "Run"; 
 	mouseInputs = new MouseInputs(this); 
-	ImportImg(); 
+	ImportImg(imgPath); 
 	loadAnimations(); 
 	setPanelSize(); 
 	addKeyListener(new KeyboardInputs(this)); 
@@ -43,30 +56,26 @@ public class GamePanel extends JPanel {
 	private void loadAnimations() {
 
 		// numbers for die 
-		int widthOfSpite = 239; 
-		int heightOfSpite = 199; 
+		//int widthOfSpite = 239; 
+		//int heightOfSpite = 199; 
 		
-		/* numbers for for shoot idle run 
-		 * 		int widthOfSpite = 239; 
+		// numbers for for shoot idle run 
+		int widthOfSpite = 239; 
 		int heightOfSpite = 250; 
-		 * 
-		 * 
-		 * */
-		idleChar = new BufferedImage[8]; 
-		runChar = new BufferedImage[6]; 
+
+		idleChar = new BufferedImage[6]; 
+		runChar = new BufferedImage[8]; 
 		shootChar = new BufferedImage[8]; 
 		dieChar = new BufferedImage[8]; 
 
 		for(int i = 0 ; i < runChar.length;i++) {
 			runChar[i] = img.getSubimage(i*widthOfSpite, 0, widthOfSpite, heightOfSpite);
 		}
-		
-		
 	}
 
-	private void ImportImg() {
-		// TODO Auto-generated method stub
-		InputStream inputStream = getClass().getResourceAsStream("/Assets/EllieDie.png"); 
+	private void ImportImg( String imgPath) {
+		
+		InputStream inputStream = getClass().getResourceAsStream("/Assets/Ellie"+ imgPath + ".png"); 
 		
 		try {
 			img = ImageIO.read(inputStream);
@@ -90,18 +99,28 @@ public class GamePanel extends JPanel {
 		setPreferredSize(size); 
 	}
 
-
-	public void changeXDelta(int value){
-		this.xDelta += value; 
+	public void setDirection(int direction) {
+		this.playerDirection = direction; 
 	}
 	
-	public void changeYDelta(int value){
-		this.yDelta += value; 
-	}
-	private int times = 0 ; 
+	private void setAnimation() {
+		if (moving) {
+			playerAction = ELLIE_RUN; 
+			//imgPath = "Run"; 
+			//ImportImg(imgPath); 
+		}
+		else {
+			playerAction = ELLIE_IDLE; 
+			//imgPath = "Idle"; 
+			//ImportImg(imgPath); 
+	} 
+		}
+	
+	
 	public void paintComponent(Graphics g) {
-		int xLocationOfDisplay = 0 ; 
-		int yLocationOfDisplay = 0 ; 
+
+		//int xLocationOfDisplay = xDelta ; 
+		//int yLocationOfDisplay = yDelta ; 
 		
 		int resizeSpiteWidthTo = 75; 
 		int resizeSpiteHieghtTo =75; 
@@ -109,32 +128,61 @@ public class GamePanel extends JPanel {
 		int xlocationOfSubimage = 0; 
 		int ylocationOfSubimage = 0; 
 		
-		int widthOfInsideSubimage = 225; 
-		int hieghtOfInsideSubimage = 199; 
+		//int widthOfInsideSubimage = 225; 
+	//	int hieghtOfInsideSubimage = 199; 
 
 		
 		// for other none die 
-	//	int widthOfInsideSubimage = 225; 
-	//	int hieghtOfInsideSubimage = 250; 
+		int widthOfInsideSubimage = 225; 
+		int hieghtOfInsideSubimage = 250; 
 
-		
 		super.paintComponent(g);
 		
 		updateAnimationTick(); 
+		setAnimation(); 
+		updatePos(); 
 		g.drawImage(runChar[aniIndex].getSubimage(xlocationOfSubimage, ylocationOfSubimage, widthOfInsideSubimage,  hieghtOfInsideSubimage), 
-				xLocationOfDisplay	, yLocationOfDisplay ,resizeSpiteWidthTo,resizeSpiteHieghtTo,  null); 
-		
-		if(times <1200)
-		times+= 1; 
-		
-		if(times >= 1200) {
-			times = 0 ; 
+				xDelta	, yDelta ,resizeSpiteWidthTo,resizeSpiteHieghtTo,  null); 
+
+
+	}
+
+	private void updatePos() {
+		if(moving) {
+			switch(playerDirection) {
+			case LEFT:
+				if(xDelta <= 2) {
+					break; 
+				}else {
+					xDelta -= 2 ; 
+				}
+				break; 
+			case UP:
+				if(yDelta <= 2) {
+					break; 
+				}else {
+					yDelta -= 2 ; 
+				}
+				break; 		
+			case RIGHT:
+				if(xDelta >= 1198) {
+					break; 
+				}else {
+					xDelta += 2 ; 
+				}
+				break;
+			case DOWN:
+				if(yDelta >= 790) {
+					break; 
+				}else {
+					yDelta += 2 ; 
+				}
+				break; 
+			}
 		}
 		
 	}
-	
-	
-	
+
 	public static void print(String s) {
 		System.out.println(s);
 	}

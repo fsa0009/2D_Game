@@ -23,15 +23,13 @@ public class MouseInputs implements MouseListener , MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		//print("mouse moved");
-		//gamePanel.SetRecPos(e.getX(), e.getY());
+		print("mouse moved");
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		//print("mouse clicked");
-		//gamePanel.SetRecPos(e.getX(), e.getY());
 	}
 
 	@Override

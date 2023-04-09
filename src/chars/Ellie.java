@@ -45,7 +45,7 @@ public class Ellie extends JPanel {
 		importAllElliePics();
 		loadAllEllieAnimations( 239 ,  250);
 		
-		paintEllie(   EllieState );
+		paintEllie(  EllieState );
 		updateAnimationTick( EllieState) ;
 	}
 	
@@ -93,11 +93,11 @@ public class Ellie extends JPanel {
 		if (EllieState == 0 ) {
 			toUpdate =  idleElliePics; 
 		}else if (EllieState ==1 ) {
-			toUpdate =  idleElliePics; 
+			toUpdate =  shootElliePics; 
 		}else if (EllieState ==2 ) {
-			toUpdate =  idleElliePics; 
+			toUpdate =  runElliePics; 
 		}else if (EllieState ==3 ) {
-			toUpdate =  idleElliePics; 
+			toUpdate =  dieElliePics; 
 		}else {
 			print("Wrong Ellie State"); 
 			return false; 
@@ -116,14 +116,6 @@ public class Ellie extends JPanel {
 		
 	}
 
-	public void changeXDelta(int value){
-		this.xDelta += value; 
-	}
-	
-	public void changeYDelta(int value){
-		this.yDelta += value; 
-	}
-	
 	private int times = 0 ; 
 	
 	public void paintEllie( int EllieState ) {
