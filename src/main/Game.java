@@ -2,7 +2,8 @@ package main;
 
 import java.awt.Graphics;
 
-import entities.Ellie; 
+import entities.Ellie;
+import levels.LevelManager; 
 
 public class Game implements Runnable{
 	
@@ -10,6 +11,7 @@ public class Game implements Runnable{
 	private GamePanel gamePanel; 
 	private Thread gameLoopThread; 
 	private final int FPS = 120; 
+	private LevelManager levelManager; 
 	
 	public final static int TILES_DEFALT_SIZE = 32; 
 	public final static float SCALE = 1.5f; 
@@ -32,7 +34,8 @@ public class Game implements Runnable{
 	}
 	
 	private void initClasses() {
-		Ellie = new Ellie(200, 200); 		
+		Ellie = new Ellie(200, 200);
+		levelManager = new LevelManager(this) ; 
 	}
 
 	private void startGameLoop() {
@@ -43,10 +46,12 @@ public class Game implements Runnable{
 	
 	public void update() {
 		Ellie.update();
+		levelManager.update();
 	}
 	
 	public void render(Graphics g) {
 		Ellie.render(g);
+		levelManager.draw(g); 
 	}
 
 	// game loop function to repaint the game for every frame 
