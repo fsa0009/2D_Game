@@ -35,11 +35,22 @@ public class Ellie extends Entity {
 	
 	private boolean left, up, right, down ; 
 
+	private boolean shooting = false; 
+	
+	
 	public Ellie(float x , float y ) {
 		super(x, y); 
 		importAllElliePics();
 		loadAllEllieAnimations();
 	
+	}
+	
+	public void importBulletImage () {
+		
+	}
+	
+	public void animateBullet() {
+		
 	}
 	
 	public void update() {
@@ -48,6 +59,9 @@ public class Ellie extends Entity {
 		updatePos(); 
 	}
 	
+	public void setShooting(boolean shooting){
+		this.shooting = shooting ; 
+	}
 	public void render(Graphics g ) {
 		int xLocationOfDisplay = x ; 
 		int yLocationOfDisplay = y ; 
@@ -149,6 +163,7 @@ public class Ellie extends Entity {
 			aniIndex++; 
 			if(aniIndex >= getSpriteAmount(playerAction)) {
 				aniIndex = 0 ; 
+				shooting = false; 
 			}
 		}
 	}
@@ -164,14 +179,26 @@ public class Ellie extends Entity {
 	
 	// change Ellie state
 	private void setAnimation() {
+		int startAni = playerAction; 
+		
 		if (moving) {
 			playerAction = ELLIE_RUN; 
+		}else if (shooting) {
+			playerAction = ELLIE_SHOOT; 
 		}
 		else {
 			playerAction = ELLIE_IDLE; 
 	} 
+		if(startAni != playerAction) {
+			resetAniTick(); 
+		}
 		}
 	
+	private void resetAniTick() {
+		aniTick = 0 ; 
+		aniIndex = 0 ; 
+	}
+
 	// change Ellie position based on user arrow inputs
 	private void updatePos() {
 		if(moving) {

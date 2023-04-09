@@ -30,6 +30,9 @@ public class MouseInputs implements MouseListener , MouseMotionListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		//print("mouse clicked");
+		if(e.getButton() == MouseEvent.BUTTON1) {
+			gamePanel.getGame().getEllie().setShooting(true);
+		}
 	}
 
 	@Override
