@@ -18,9 +18,11 @@ public class GamePanel extends JPanel {
 
 	private MouseInputs mouseInputs;
 	private int xDelta =100 , yDelta =100; 
-	private BufferedImage[] idleChar; 
 	private BufferedImage img; 
 	private BufferedImage[] runChar; 
+	private BufferedImage[] shootChar; 
+	private BufferedImage[] dieChar; 
+	private BufferedImage[] idleChar; 
 
 	private int aniTick , aniIndex , aniSpeed = 15; 
 	
@@ -40,11 +42,21 @@ public class GamePanel extends JPanel {
 	
 	private void loadAnimations() {
 
+		// numbers for die 
 		int widthOfSpite = 239; 
 		int heightOfSpite = 199; 
+		
+		/* numbers for for shoot idle run 
+		 * 		int widthOfSpite = 239; 
+		int heightOfSpite = 250; 
+		 * 
+		 * 
+		 * */
 		idleChar = new BufferedImage[8]; 
 		runChar = new BufferedImage[6]; 
-		
+		shootChar = new BufferedImage[8]; 
+		dieChar = new BufferedImage[8]; 
+
 		for(int i = 0 ; i < runChar.length;i++) {
 			runChar[i] = img.getSubimage(i*widthOfSpite, 0, widthOfSpite, heightOfSpite);
 		}
@@ -100,6 +112,12 @@ public class GamePanel extends JPanel {
 		int widthOfInsideSubimage = 225; 
 		int hieghtOfInsideSubimage = 199; 
 
+		
+		// for other none die 
+	//	int widthOfInsideSubimage = 225; 
+	//	int hieghtOfInsideSubimage = 250; 
+
+		
 		super.paintComponent(g);
 		
 		updateAnimationTick(); 
