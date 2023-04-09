@@ -29,11 +29,11 @@ public class Constants {
 			case ELLIE_SHOOT:
 				return 8; 
 			case ELLIE_RUN:
-				return 6; 
+				return 8; 
 			case ELLIE_DIE:
 				return 6; 
 			default:
-				return 0; 
+				return 6; 
 			}
 		}
 		

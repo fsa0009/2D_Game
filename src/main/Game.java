@@ -1,23 +1,42 @@
 package main;
 
+import java.awt.Graphics;
+
+import entities.Ellie; 
+
 public class Game implements Runnable{
 	
 	private Window gWindow; 
 	private GamePanel gamePanel; 
 	private Thread gameLoopThread; 
 	private final int FPS = 120; 
+	
+	private Ellie Ellie; 
+	
 	public Game() {
-		
-		gamePanel = new GamePanel(); 
+		initClasses();
+		gamePanel = new GamePanel(this); 
 		gWindow = new Window(gamePanel); 
 		gamePanel.requestFocus();
 		startGameLoop(); 
 	}
 	
+	private void initClasses() {
+		Ellie = new Ellie(200, 200); 		
+	}
+
 	private void startGameLoop() {
 		gameLoopThread = new Thread(this); 
 		gameLoopThread.start();
 		
+	}
+	
+	public void update() {
+		Ellie.update();
+	}
+	
+	public void render(Graphics g) {
+		Ellie.render(g);
 	}
 
 	// game loop function to repaint the game for every frame 
@@ -38,6 +57,7 @@ public class Game implements Runnable{
 			if(System.nanoTime() - lastFrame >= timePerFrame) {
 				
 				gamePanel.repaint();
+				update();
 				lastFrame= now; 
 				frames++; 
 				
@@ -50,10 +70,13 @@ public class Game implements Runnable{
 			}
 		}
 	}
-	
+	public Ellie getEllie() {
+		return Ellie; 
+	}
 	
 	public static void print(String s) {
 		System.out.println(s);
 	}
+	
 	
 }

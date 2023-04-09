@@ -23,7 +23,7 @@ public class MouseInputs implements MouseListener , MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		print("mouse moved");
+		//print("mouse moved");
 	}
 
 	@Override

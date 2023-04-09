@@ -25,20 +25,20 @@ public class KeyboardInputs implements KeyListener{
 		// TODO Auto-generated method stub
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_A:
-			gamePanel.setMoving(true); 
-			gamePanel.setDirection(LEFT); 
+			gamePanel.getGame().getEllie().setMoving(true); 
+			gamePanel.getGame().getEllie().setDirection(LEFT); 
 			break;
 		case KeyEvent.VK_S:
-			gamePanel.setMoving(true);
-			gamePanel.setDirection(DOWN); 
+			gamePanel.getGame().getEllie().setMoving(true);
+			gamePanel.getGame().getEllie().setDirection(DOWN); 
 			break;
 		case KeyEvent.VK_W:
-			gamePanel.setMoving(true);
-			gamePanel.setDirection(UP); 
+			gamePanel.getGame().getEllie().setMoving(true);
+			gamePanel.getGame().getEllie().setDirection(UP); 
 			break;
 		case KeyEvent.VK_D:
-			gamePanel.setMoving(true);
-			gamePanel.setDirection(RIGHT); 
+			gamePanel.getGame().getEllie().setMoving(true);
+			gamePanel.getGame().getEllie().setDirection(RIGHT); 
 			break;
 		}
 
@@ -48,21 +48,20 @@ public class KeyboardInputs implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_A:
-			gamePanel.setMoving(false); 
+			gamePanel.getGame().getEllie().setMoving(false);
+			
 			break;
 		case KeyEvent.VK_S:
-			gamePanel.setMoving(false); 
+			gamePanel.getGame().getEllie().setMoving(false); 
 			break;
 		case KeyEvent.VK_W:
-			gamePanel.setMoving(false); 
+			gamePanel.getGame().getEllie().setMoving(false); 
 			break;
 		case KeyEvent.VK_D:
-			gamePanel.setMoving(false); 
+			gamePanel.getGame().getEllie().setMoving(false); 
 			break;
 		}		
 	}
-	
-	
 	
 	public static void print(String s) {
 		System.out.println(s);

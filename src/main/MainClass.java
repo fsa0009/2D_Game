@@ -2,7 +2,6 @@ package main;
 
 import javax.swing.JPanel;
 
-import chars.Ellie;
 public class MainClass {
 
 	public static void main(String[] args) {
