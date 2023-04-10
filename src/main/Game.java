@@ -58,7 +58,7 @@ public class Game implements Runnable{
 	}
 
 	// game loop function to repaint the game for every frame 
-	@Override
+
 	public void run() {
 		// TODO Auto-generated method stub
 		
