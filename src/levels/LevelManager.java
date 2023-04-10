@@ -19,7 +19,7 @@ public class LevelManager {
 	
 	
 	public void draw(Graphics g) {
-		g.drawImage(levelSprite, 0, -200,1680 ,960,  null) ; 
+		g.drawImage(levelSprite, 0, 0,1248 ,672,  null) ; 
 	}
 	
 	public void update() {

@@ -27,7 +27,7 @@ public class Ellie extends Entity {
 	private int playerAction = ELLIE_DIE ; 
 	private int aniTick , aniIndex , aniSpeed = 25; 
 	
-	private int x = 200; private int y = 200 ; 
+	private int x = 0; private int y = 500 ; 
 	
 	private int playerDirection = -1; 
 	private boolean moving = false; 
@@ -225,14 +225,14 @@ public class Ellie extends Entity {
 				}
 				break; 		
 			case RIGHT:
-				if(x >= 1125) {
+				if(x >= 1173) {
 					break; 
 				}else {
 					x += 1 ; 
 				}
 				break;
 			case DOWN:
-				if(y >= 725) {
+				if(y >= 597) {
 					break; 
 				}else {
 					y += 1 ; 
