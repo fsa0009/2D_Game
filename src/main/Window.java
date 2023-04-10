@@ -13,7 +13,6 @@ public class Window {
 
 	public Window(GamePanel gamePanel) {
 		jFrame = new JFrame(); 
-		
 		//jFrame.setSize(400 , 400);
 		jFrame.setVisible(true);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

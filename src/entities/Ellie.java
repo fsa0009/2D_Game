@@ -37,9 +37,9 @@ public class Ellie extends Entity {
 
 	private boolean shooting = false; 
 	
-	
+
 	public Ellie(float x , float y ) {
-		super(x, y); 
+		super(x, y ); 
 		importAllElliePics();
 		loadAllEllieAnimations();
 	
@@ -56,12 +56,15 @@ public class Ellie extends Entity {
 	public void update() {
 		updateAnimationTick(); 
 		setAnimation(); 
-		updatePos(); 
+		updatePos();
+		updateHitbox(); 
+
 	}
 	
 	public void setShooting(boolean shooting){
 		this.shooting = shooting ; 
 	}
+	
 	public void render(Graphics g ) {
 		int xLocationOfDisplay = x ; 
 		int yLocationOfDisplay = y ; 
@@ -82,19 +85,22 @@ public class Ellie extends Entity {
 			hieghtOfInsideSubimage = 199; 
 		}
 		
-	
 		if(aniIndex >= determineAnimationArray().length || aniIndex <0 ) {
 			if(determineAnimationArray()[0] != null) {
 				aniIndex = 0; 
 				g.drawImage(determineAnimationArray()[aniIndex], 
 						x	, y ,resizeSpiteWidthTo,resizeSpiteHieghtTo,  null);
+				drawHitbox(g); 
+
 			}
 		}else {
 			if(determineAnimationArray()[aniIndex] != null) {
 				g.drawImage(determineAnimationArray()[aniIndex], 
 						x	, y ,resizeSpiteWidthTo,resizeSpiteHieghtTo,  null);
+				drawHitbox(g); 
 			}
 		}
+
 
 	}
 	
@@ -200,7 +206,8 @@ public class Ellie extends Entity {
 	}
 
 	// change Ellie position based on user arrow inputs
-	private void updatePos() {
+	private int[] updatePos() {
+		int [] coordinates = new int[2];  
 		if(moving) {
 			switch(playerDirection) {
 			case LEFT:
@@ -233,7 +240,9 @@ public class Ellie extends Entity {
 				break; 
 			}
 		}
-		
+		coordinates [0] = x ; 
+		coordinates [1] = y ; 
+		return coordinates;
 	}
 
 	public static void print(String s) {
